@@ -1,0 +1,1 @@
+export const GOOGLE_AUTH_POPUP = 'GOOGLE_AUTH_POPUP'

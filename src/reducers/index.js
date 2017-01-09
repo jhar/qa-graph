@@ -1,12 +1,6 @@
-const SOMETHING = 'SOMETHING'
+import { combineReducers } from 'redux'
+import firebase from '../firebase/reducer'
 
-const initial = {}
+const reducer = combineReducers({ firebase })
 
-export const rootReducer = (state = initial, action) => {
-  switch (action.type) {
-    case SOMETHING:
-      return { ...state, something: true }
-    default:
-      return state
-  }
-}
+export default reducer

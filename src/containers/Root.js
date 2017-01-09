@@ -1,12 +1,17 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { googleAuthPopup } from '../firebase/index'
-
+import { firebase, provider } from '../firebase/index'
+import { googleAuthPopup } from '../firebase/actions'
+import Title from './Title'
 
 const Root = ({ dispatch }) => {
   return (
     <div>
-      <h1 onClick={googleAuthPopup}>Google Auth</h1>
+      <h1>Root</h1>
+      <Title
+        dispatch={dispatch}
+        googleAuthPopup={() => googleAuthPopup(firebase, provider)}
+      />
     </div>
   )
 }
