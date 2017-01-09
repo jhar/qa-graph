@@ -1,16 +1,16 @@
 import React, { PropTypes } from 'react'
 
-const Title = ({ dispatch, googleAuthPopup }) => {
+const Title = ({ googleAuthPopup }) => {
   return (
     <div>
-      <h1>Title Screen</h1>
-      <button onClick={googleAuthPopup}>Google Auth</button>
+      <h2 onClick={googleAuthPopup}>
+        Title Screen (click for Google Auth)
+      </h2>
     </div>
   )
 }
 
 Title.propTypes = {
-  dispatch: React.PropTypes.func.isRequired,
   googleAuthPopup: React.PropTypes.func.isRequired
 }
 

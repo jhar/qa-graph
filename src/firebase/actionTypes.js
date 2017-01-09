@@ -1,1 +1,1 @@
-export const GOOGLE_AUTH_POPUP = 'GOOGLE_AUTH_POPUP'
+export const GOOGLE_AUTH = 'GOOGLE_AUTH'

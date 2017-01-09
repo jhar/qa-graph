@@ -3,27 +3,35 @@ import { connect } from 'react-redux'
 import { firebase, provider } from '../firebase/index'
 import { googleAuthPopup } from '../firebase/actions'
 import Title from './Title'
+import Main from './Main'
 
-const Root = ({ dispatch }) => {
-  return (
-    <div>
-      <h1>Root</h1>
+console.log('firebase: ' + firebase)
+console.log('provider: ' + provider)
+console.log('google: ' + googleAuthPopup)
+
+const Root = ({ dispatch, user }) => {
+  if (!user) {
+    return (
       <Title
         dispatch={dispatch}
-        googleAuthPopup={() => googleAuthPopup(firebase, provider)}
+        googleAuthPopup={() => {
+          googleAuthPopup(dispatch, firebase, provider)
+        }}
       />
-    </div>
-  )
+    )
+  } else {
+    return <Main dispatch={dispatch} user={user} />
+  }
 }
 
 Root.propTypes = {
-  // Nothing for now
+  user: React.PropTypes.object
 }
 
 const mapStateToProps = state => {
   console.log(state)
   return {
-
+    user: state.firebase.user
   }
 }
 

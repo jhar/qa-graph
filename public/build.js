@@ -31731,7 +31731,7 @@
 	  var action = arguments[1];
 
 	  switch (action.type) {
-	    case _actionTypes.GOOGLE_AUTH_POPUP:
+	    case _actionTypes.GOOGLE_AUTH:
 	      return (0, _extends3.default)({}, state, {
 	        token: action.token,
 	        user: action.user
@@ -32285,7 +32285,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	var GOOGLE_AUTH_POPUP = exports.GOOGLE_AUTH_POPUP = 'GOOGLE_AUTH_POPUP';
+	var GOOGLE_AUTH = exports.GOOGLE_AUTH = 'GOOGLE_AUTH';
 
 /***/ },
 /* 554 */
@@ -32311,35 +32311,41 @@
 
 	var _Title2 = _interopRequireDefault(_Title);
 
+	var _Main = __webpack_require__(564);
+
+	var _Main2 = _interopRequireDefault(_Main);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var Root = function Root(_ref) {
-	  var dispatch = _ref.dispatch;
+	console.log('firebase: ' + _index.firebase);
+	console.log('provider: ' + _index.provider);
+	console.log('google: ' + _actions.googleAuthPopup);
 
-	  return _react2.default.createElement(
-	    'div',
-	    null,
-	    _react2.default.createElement(
-	      'h1',
-	      null,
-	      'Root'
-	    ),
-	    _react2.default.createElement(_Title2.default, {
+	var Root = function Root(_ref) {
+	  var dispatch = _ref.dispatch,
+	      user = _ref.user;
+
+	  if (!user) {
+	    return _react2.default.createElement(_Title2.default, {
 	      dispatch: dispatch,
 	      googleAuthPopup: function googleAuthPopup() {
-	        return (0, _actions.googleAuthPopup)(_index.firebase, _index.provider);
+	        (0, _actions.googleAuthPopup)(dispatch, _index.firebase, _index.provider);
 	      }
-	    })
-	  );
+	    });
+	  } else {
+	    return _react2.default.createElement(_Main2.default, { dispatch: dispatch, user: user });
+	  }
 	};
 
 	Root.propTypes = {
-	  // Nothing for now
+	  user: _react2.default.PropTypes.object
 	};
 
 	var mapStateToProps = function mapStateToProps(state) {
 	  console.log(state);
-	  return {};
+	  return {
+	    user: state.firebase.user
+	  };
 	};
 
 	exports.default = (0, _reactRedux.connect)(mapStateToProps)(Root);
@@ -33063,26 +33069,21 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.googleAuthPopup = exports.googleAuth = undefined;
+	exports.googleAuthPopup = undefined;
 
 	var _actionTypes = __webpack_require__(553);
 
-	var googleAuth = exports.googleAuth = function googleAuth(token, user) {
+	var googleAuth = function googleAuth(token, user) {
 	  return {
 	    token: token,
-	    type: _actionTypes.GOOGLE_AUTH_POPUP,
+	    type: _actionTypes.GOOGLE_AUTH,
 	    user: user
 	  };
 	};
 
-	var googleAuthPopup = exports.googleAuthPopup = function googleAuthPopup(firebase, provider) {
+	var googleAuthPopup = exports.googleAuthPopup = function googleAuthPopup(dispatch, firebase, provider) {
 	  firebase.auth().signInWithPopup(provider).then(function (result) {
-	    console.log(result.credential.accessToken);
-	    console.log(result.user);
-	    return {
-	      token: result.credential.accessToken,
-	      user: result.user
-	    };
+	    dispatch(googleAuth(result.credential.accessToken, result.user));
 	  }).catch(function (error) {
 	    console.log(error.code);
 	    console.log(error.message);
@@ -33108,31 +33109,72 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var Title = function Title(_ref) {
-	  var dispatch = _ref.dispatch,
-	      googleAuthPopup = _ref.googleAuthPopup;
+	  var googleAuthPopup = _ref.googleAuthPopup;
 
 	  return _react2.default.createElement(
 	    'div',
 	    null,
 	    _react2.default.createElement(
-	      'h1',
-	      null,
-	      'Title Screen'
-	    ),
-	    _react2.default.createElement(
-	      'button',
+	      'h2',
 	      { onClick: googleAuthPopup },
-	      'Google Auth'
+	      'Title Screen (click for Google Auth)'
 	    )
 	  );
 	};
 
 	Title.propTypes = {
-	  dispatch: _react2.default.PropTypes.func.isRequired,
 	  googleAuthPopup: _react2.default.PropTypes.func.isRequired
 	};
 
 	exports.default = Title;
+
+/***/ },
+/* 564 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(299);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Main = function Main(_ref) {
+	  var dispatch = _ref.dispatch,
+	      user = _ref.user;
+
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    _react2.default.createElement(
+	      'h2',
+	      null,
+	      'Main View'
+	    ),
+	    _react2.default.createElement(
+	      'h3',
+	      null,
+	      user.displayName
+	    ),
+	    _react2.default.createElement(
+	      'h4',
+	      null,
+	      user.email
+	    )
+	  );
+	};
+
+	Main.propTypes = {
+	  dispatch: _react2.default.PropTypes.func.isRequired,
+	  user: _react2.default.PropTypes.object.isRequired
+	};
+
+	exports.default = Main;
 
 /***/ }
 /******/ ]);

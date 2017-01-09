@@ -1,8 +1,8 @@
-import { GOOGLE_AUTH_POPUP } from './actionTypes'
+import { GOOGLE_AUTH } from './actionTypes'
 
 const firebase = (state = {}, action) => {
   switch (action.type) {
-    case GOOGLE_AUTH_POPUP:
+    case GOOGLE_AUTH:
       return {
         ...state,
         token: action.token,

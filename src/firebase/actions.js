@@ -1,20 +1,15 @@
-import { GOOGLE_AUTH_POPUP } from './actionTypes'
+import { GOOGLE_AUTH } from './actionTypes'
 
-export const googleAuth = (token, user) => ({
+const googleAuth = (token, user) => ({
   token,
-  type: GOOGLE_AUTH_POPUP,
+  type: GOOGLE_AUTH,
   user
 })
 
-export const googleAuthPopup = (firebase, provider) => {
+export const googleAuthPopup = (dispatch, firebase, provider) => {
   firebase.auth().signInWithPopup(provider)
     .then(result => {
-      console.log(result.credential.accessToken)
-      console.log(result.user)
-      return {
-        token: result.credential.accessToken,
-        user: result.user
-      }
+      dispatch(googleAuth(result.credential.accessToken, result.user))
     })
     .catch(error => {
       console.log(error.code)
