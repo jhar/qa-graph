@@ -13,7 +13,6 @@ const Root = ({ dispatch, user }) => {
   if (!user) {
     return (
       <Title
-        dispatch={dispatch}
         googleAuthPopup={() => {
           googleAuthPopup(dispatch, firebase, provider)
         }}
