@@ -4,7 +4,7 @@
   "description": "Multi-user graph of questions and answers",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "webpack --progress --colors --watch"
   },
   "author": "Justin A. Harrison",
   "license": "ISC",
