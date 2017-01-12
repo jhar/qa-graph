@@ -1,0 +1,46 @@
+.title-view {
+  background: rgba(255, 255, 255, 0.38);
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.title-center-container {
+  background: rgba(255, 255, 255, 0.86);
+  border-radius: 4%;
+  box-shadow: 0px 2px 20px #888888;
+  margin: 32% auto 0 auto;
+  min-width: 300px;
+  padding: 3%;
+  text-align: center;
+  width: 38%;
+}
+
+.title-header {
+  color: rgba(0, 0, 0, 0.86);
+  font-size: 300%;
+  top: 38%;
+}
+
+.title-sub {
+  color: rgba(0, 0, 0, 0.62);
+  font-size: 160%;
+}
+
+.title-lower-container {
+  position: absolute;
+  bottom: 2%;
+  left: 2%;
+}
+
+.title-small {
+
+}
+
+.google-sign-in {
+  display: block;
+  height: 50px;
+  margin: 0 auto;
+}

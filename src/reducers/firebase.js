@@ -1,4 +1,4 @@
-import { GOOGLE_AUTH } from './actionTypes'
+import { GOOGLE_AUTH } from '../constants/actionTypes'
 
 const firebase = (state = {}, action) => {
   switch (action.type) {
