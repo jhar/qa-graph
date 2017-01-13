@@ -1,0 +1,32 @@
+.gp-container {
+  width: 100%;
+}
+
+.gp-photo-container {
+  border-radius: 50%;
+  height: 150px;
+  margin: 0 auto;
+  overflow: hidden;
+  width: 150px;
+}
+
+.gp-photo {
+  display: inline;
+  margin: 0 auto;
+  height: 100%;
+  width: auto;
+}
+
+.gp-text-container {
+  width: 100%;
+  text-align: center;
+}
+
+.gp-name {
+  color: rgba(0, 0, 0, 0.62);
+  font-size: 26px;
+}
+
+.gp-email {
+  font-size: 14px;
+}

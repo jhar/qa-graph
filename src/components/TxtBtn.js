@@ -8,7 +8,7 @@ const TxtBtn = ({ action, css, txt }) => {
   )
 }
 
-Toolbar.propTypes = {
+TxtBtn.propTypes = {
   action: React.PropTypes.func.isRequired,
   css: React.PropTypes.string.isRequired,
   txt: React.PropTypes.string.isRequired

@@ -1,16 +1,20 @@
 import { ANIMATE_CSS } from '../constants/actionTypes'
 
-const ui = (state = {}, action) => {
+const initial = {
+  dashboard: {
+    animate: false,
+    open: false
+  }
+}
+
+const ui = (state = initial, action) => {
   switch (action.type) {
     case ANIMATE_CSS:
       return {
         ...state,
-        ui: {
-          ...state.ui,
-          [action.target]: {
-            animate: true,
-            open: !state.ui[action.target].open
-          }
+        [action.target]: {
+          animate: true,
+          open: !state[action.target].open
         }
       }
     default:

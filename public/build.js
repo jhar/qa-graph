@@ -8208,7 +8208,7 @@
 
 	var _index2 = _interopRequireDefault(_index);
 
-	var _Root = __webpack_require__(559);
+	var _Root = __webpack_require__(560);
 
 	var _Root2 = _interopRequireDefault(_Root);
 
@@ -31706,7 +31706,7 @@
 
 	var _three2 = _interopRequireDefault(_three);
 
-	var _ui = __webpack_require__(588);
+	var _ui = __webpack_require__(559);
 
 	var _ui2 = _interopRequireDefault(_ui);
 
@@ -31743,10 +31743,15 @@
 	  var action = arguments[1];
 
 	  switch (action.type) {
-	    case _actionTypes.GOOGLE_AUTH:
+	    case _actionTypes.GOOGLE_SIGN_IN:
 	      return (0, _extends3.default)({}, state, {
 	        token: action.token,
 	        user: action.user
+	      });
+	    case _actionTypes.GOOGLE_SIGN_OUT:
+	      return (0, _extends3.default)({}, state, {
+	        token: undefined,
+	        user: undefined
 	      });
 	    default:
 	      return state;
@@ -32298,7 +32303,8 @@
 	  value: true
 	});
 	var ANIMATE_CSS = exports.ANIMATE_CSS = 'ANIMATE_CSS';
-	var GOOGLE_AUTH = exports.GOOGLE_AUTH = 'GOOGLE_AUTH';
+	var GOOGLE_SIGN_IN = exports.GOOGLE_SIGN_IN = 'GOOGLE_SIGN_IN';
+	var GOOGLE_SIGN_OUT = exports.GOOGLE_SIGN_OUT = 'GOOGLE_SIGN_OUT';
 	var CONTROL_SCENE = exports.CONTROL_SCENE = 'CONTROL_SCENE';
 
 /***/ },
@@ -32402,31 +32408,77 @@
 	  value: true
 	});
 
+	var _defineProperty2 = __webpack_require__(555);
+
+	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
+
+	var _extends3 = __webpack_require__(515);
+
+	var _extends4 = _interopRequireDefault(_extends3);
+
+	var _actionTypes = __webpack_require__(553);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var initial = {
+	  dashboard: {
+	    animate: false,
+	    open: false
+	  }
+	};
+
+	var ui = function ui() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initial;
+	  var action = arguments[1];
+
+	  switch (action.type) {
+	    case _actionTypes.ANIMATE_CSS:
+	      return (0, _extends4.default)({}, state, (0, _defineProperty3.default)({}, action.target, {
+	        animate: true,
+	        open: !state[action.target].open
+	      }));
+	    default:
+	      return state;
+	  }
+	};
+
+	exports.default = ui;
+
+/***/ },
+/* 560 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
 	var _react = __webpack_require__(299);
 
 	var _react2 = _interopRequireDefault(_react);
 
 	var _reactRedux = __webpack_require__(496);
 
-	var _firebase = __webpack_require__(560);
+	var _firebase = __webpack_require__(561);
 
-	var _firebase2 = __webpack_require__(567);
+	var _firebase2 = __webpack_require__(568);
 
-	var _three = __webpack_require__(568);
+	var _three = __webpack_require__(569);
 
-	var _title = __webpack_require__(569);
+	var _title = __webpack_require__(570);
 
 	var _title2 = _interopRequireDefault(_title);
 
-	var _main = __webpack_require__(571);
+	var _main = __webpack_require__(572);
 
 	var _main2 = _interopRequireDefault(_main);
 
-	var _Title = __webpack_require__(572);
+	var _Title = __webpack_require__(573);
 
 	var _Title2 = _interopRequireDefault(_Title);
 
-	var _Main = __webpack_require__(579);
+	var _Main = __webpack_require__(580);
 
 	var _Main2 = _interopRequireDefault(_Main);
 
@@ -32457,7 +32509,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps)(Root);
 
 /***/ },
-/* 560 */
+/* 561 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -32467,7 +32519,7 @@
 	});
 	exports.provider = exports.firebase = undefined;
 
-	var _firebase = __webpack_require__(561);
+	var _firebase = __webpack_require__(562);
 
 	var _firebase2 = _interopRequireDefault(_firebase);
 
@@ -32487,7 +32539,7 @@
 	exports.provider = provider;
 
 /***/ },
-/* 561 */
+/* 562 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -32497,16 +32549,16 @@
 	 *
 	 *   firebase = require('firebase');
 	 */
-	var firebase = __webpack_require__(562);
-	__webpack_require__(563);
+	var firebase = __webpack_require__(563);
 	__webpack_require__(564);
 	__webpack_require__(565);
 	__webpack_require__(566);
+	__webpack_require__(567);
 	module.exports = firebase;
 
 
 /***/ },
-/* 562 */
+/* 563 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {var firebase = (function(){
@@ -32546,10 +32598,10 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 563 */
+/* 564 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(global) {var firebase = __webpack_require__(562);
+	/* WEBPACK VAR INJECTION */(function(global) {var firebase = __webpack_require__(563);
 	(function(){
 	/*! @license Firebase v3.6.4
 	    Build: 3.6.4-rc.2
@@ -32792,10 +32844,10 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 564 */
+/* 565 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(global) {var firebase = __webpack_require__(562);
+	/* WEBPACK VAR INJECTION */(function(global) {var firebase = __webpack_require__(563);
 	(function(){
 	/*! @license Firebase v3.6.4
 	    Build: 3.6.4-rc.2
@@ -33063,10 +33115,10 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 565 */
+/* 566 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(global) {var firebase = __webpack_require__(562);
+	/* WEBPACK VAR INJECTION */(function(global) {var firebase = __webpack_require__(563);
 	(function(){
 	/*! @license Firebase v3.6.4
 	    Build: 3.6.4-rc.2
@@ -33121,10 +33173,10 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 566 */
+/* 567 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(global) {var firebase = __webpack_require__(562);
+	/* WEBPACK VAR INJECTION */(function(global) {var firebase = __webpack_require__(563);
 	(function(){
 	/*! @license Firebase v3.6.4
 	    Build: 3.6.4-rc.2
@@ -33167,7 +33219,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 567 */
+/* 568 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33175,15 +33227,15 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.googleAuth = undefined;
+	exports.googleSignOut = exports.googleSignIn = undefined;
 
 	var _actionTypes = __webpack_require__(553);
 
-	var googleAuth = exports.googleAuth = function googleAuth(dispatch, firebase, provider) {
+	var googleSignIn = exports.googleSignIn = function googleSignIn(dispatch, firebase, provider) {
 	  firebase.auth().signInWithPopup(provider).then(function (result) {
 	    dispatch({
 	      token: result.credential.accessToken,
-	      type: _actionTypes.GOOGLE_AUTH,
+	      type: _actionTypes.GOOGLE_SIGN_IN,
 	      user: result.user
 	    });
 	  }).catch(function (error) {
@@ -33194,8 +33246,17 @@
 	  });
 	};
 
+	var googleSignOut = exports.googleSignOut = function googleSignOut(dispatch, firebase) {
+	  firebase.auth().signOut().then(function () {
+	    dispatch({ type: _actionTypes.GOOGLE_SIGN_OUT });
+	  }, function (error) {
+	    console.log(error);
+	    // TODO: Error action
+	  });
+	};
+
 /***/ },
-/* 568 */
+/* 569 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33218,7 +33279,7 @@
 	};
 
 /***/ },
-/* 569 */
+/* 570 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33227,7 +33288,7 @@
 	  value: true
 	});
 
-	var _three = __webpack_require__(570);
+	var _three = __webpack_require__(571);
 
 	var THREE = _interopRequireWildcard(_three);
 
@@ -33297,7 +33358,7 @@
 	exports.default = startTitle;
 
 /***/ },
-/* 570 */
+/* 571 */
 /***/ function(module, exports, __webpack_require__) {
 
 	(function (global, factory) {
@@ -76647,7 +76708,7 @@
 
 
 /***/ },
-/* 571 */
+/* 572 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -76656,7 +76717,7 @@
 	  value: true
 	});
 
-	var _three = __webpack_require__(570);
+	var _three = __webpack_require__(571);
 
 	var THREE = _interopRequireWildcard(_three);
 
@@ -76732,7 +76793,7 @@
 	exports.default = startMain;
 
 /***/ },
-/* 572 */
+/* 573 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -76745,11 +76806,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _images = __webpack_require__(573);
+	var _images = __webpack_require__(574);
 
-	var _text = __webpack_require__(574);
+	var _text = __webpack_require__(575);
 
-	__webpack_require__(575);
+	__webpack_require__(576);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -76812,7 +76873,7 @@
 	exports.default = Title;
 
 /***/ },
-/* 573 */
+/* 574 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -76824,7 +76885,7 @@
 	var GOOGLE_SIGN_IN_SRC = exports.GOOGLE_SIGN_IN_SRC = 'images/googleSignIn.png';
 
 /***/ },
-/* 574 */
+/* 575 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -76839,16 +76900,16 @@
 	var TITLE_VERSION = exports.TITLE_VERSION = '0.0.0';
 
 /***/ },
-/* 575 */
+/* 576 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(576);
+	var content = __webpack_require__(577);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(578)(content, {});
+	var update = __webpack_require__(579)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -76865,21 +76926,21 @@
 	}
 
 /***/ },
-/* 576 */
+/* 577 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(577)();
+	exports = module.exports = __webpack_require__(578)();
 	// imports
 
 
 	// module
-	exports.push([module.id, ".title-view {\n  background: rgba(255, 255, 255, 0.38);\n  height: 100%;\n  left: 0;\n  position: absolute;\n  top: 0;\n  width: 100%;\n}\n\n.title-center-container {\n  background: rgba(255, 255, 255, 0.86);\n  border-radius: 4%;\n  box-shadow: 0px 2px 20px #888888;\n  margin: 250px auto 0 auto;\n  min-width: 300px;\n  padding: 3%;\n  text-align: center;\n  width: 38%;\n}\n\n.title-header {\n  color: rgba(0, 0, 0, 0.86);\n  font-size: 300%;\n  top: 38%;\n}\n\n.title-sub {\n  color: rgba(0, 0, 0, 0.62);\n  font-size: 160%;\n}\n\n.title-lower-container {\n  position: absolute;\n  bottom: 2%;\n  left: 2%;\n}\n\n.title-small {\n\n}\n\n.google-sign-in {\n  display: block;\n  height: 50px;\n  margin: 0 auto;\n}\n", ""]);
+	exports.push([module.id, ".title-view {\n  background: rgba(255, 255, 255, 0.38);\n  height: 100%;\n  left: 0;\n  position: absolute;\n  top: 0;\n  width: 100%;\n}\n\n.title-center-container {\n  background: rgba(255, 255, 255);\n  box-shadow: 0px 2px 20px #888888;\n  margin: 250px auto 0 auto;\n  min-width: 300px;\n  padding: 3%;\n  text-align: center;\n  width: 38%;\n}\n\n.title-header {\n  color: rgba(0, 0, 0, 0.86);\n  font-size: 300%;\n  top: 38%;\n}\n\n.title-sub {\n  color: rgba(0, 0, 0, 0.62);\n  font-size: 160%;\n}\n\n.title-lower-container {\n  position: absolute;\n  bottom: 2%;\n  left: 2%;\n}\n\n.title-small {\n\n}\n\n.google-sign-in {\n  display: block;\n  height: 50px;\n  margin: 0 auto;\n}\n", ""]);
 
 	// exports
 
 
 /***/ },
-/* 577 */
+/* 578 */
 /***/ function(module, exports) {
 
 	/*
@@ -76935,7 +76996,7 @@
 
 
 /***/ },
-/* 578 */
+/* 579 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -77187,50 +77248,6 @@
 
 
 /***/ },
-/* 579 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(299);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _Toolbar = __webpack_require__(580);
-
-	var _Toolbar2 = _interopRequireDefault(_Toolbar);
-
-	var _Dashboard = __webpack_require__(583);
-
-	var _Dashboard2 = _interopRequireDefault(_Dashboard);
-
-	var _Leaderboard = __webpack_require__(584);
-
-	var _Leaderboard2 = _interopRequireDefault(_Leaderboard);
-
-	__webpack_require__(585);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var Main = function Main() {
-	  return _react2.default.createElement(
-	    'div',
-	    { className: 'main' },
-	    _react2.default.createElement(_Toolbar2.default, null),
-	    _react2.default.createElement(_Dashboard2.default, null),
-	    _react2.default.createElement(_Leaderboard2.default, null),
-	    _react2.default.createElement(Information, null),
-	    _react2.default.createElement(Settings, null)
-	  );
-	};
-
-	exports.default = Main;
-
-/***/ },
 /* 580 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -77244,17 +77261,54 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _TxtBtn = __webpack_require__(589);
+	var _Toolbar = __webpack_require__(581);
+
+	var _Toolbar2 = _interopRequireDefault(_Toolbar);
+
+	var _Dashboard = __webpack_require__(586);
+
+	var _Dashboard2 = _interopRequireDefault(_Dashboard);
+
+	__webpack_require__(592);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Main = function Main() {
+	  return _react2.default.createElement(
+	    'div',
+	    { className: 'main' },
+	    _react2.default.createElement(_Toolbar2.default, null),
+	    _react2.default.createElement(_Dashboard2.default, null)
+	  );
+	};
+
+	exports.default = Main;
+
+/***/ },
+/* 581 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(299);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _TxtBtn = __webpack_require__(582);
 
 	var _TxtBtn2 = _interopRequireDefault(_TxtBtn);
 
 	var _reactRedux = __webpack_require__(496);
 
-	var _images = __webpack_require__(573);
+	var _images = __webpack_require__(574);
 
-	var _ui = __webpack_require__(587);
+	var _ui = __webpack_require__(583);
 
-	__webpack_require__(581);
+	__webpack_require__(584);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -77267,77 +77321,14 @@
 	    { className: 'toolbar' },
 	    _react2.default.createElement(
 	      'div',
-	      { className: 'main-bar' },
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'logo' },
-	        _react2.default.createElement('img', {
-	          className: 'circle-icon',
-	          src: _images.CIRCLE_ICON_SRC
-	        })
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'search' },
-	        'Search'
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'clock' },
-	        'Clock'
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'name' },
-	        'Sographes'
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'dash-btn-container' },
-	        _react2.default.createElement(_TxtBtn2.default, {
-	          action: function action() {
-	            return (0, _ui.animateCss)(dispatch, 'dashboard');
-	          },
-	          css: 'dash-btn',
-	          txt: 'Dashboard'
-	        })
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'leader-btn-container' },
-	        _react2.default.createElement(_TxtBtn2.default, {
-	          action: function action() {
-	            return (0, _ui.animateCss)(dispatch, 'leaderboard');
-	          },
-	          css: 'leader-btn',
-	          txt: 'Leaderboard'
-	        })
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'info-btn-container' },
-	        _react2.default.createElement(_TxtBtn2.default, {
-	          action: function action() {
-	            return (0, _ui.animateCss)(dispatch, 'information');
-	          },
-	          css: 'info-btn',
-	          txt: 'Information'
-	        })
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'settings-btn-container' },
-	        'Gear'
-	      )
-	    ),
-	    _react2.default.createElement(
-	      'div',
-	      { className: 'sub-bar' },
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'section-title' },
-	        'Section'
-	      )
+	      { className: 'dash-btn-container' },
+	      _react2.default.createElement(_TxtBtn2.default, {
+	        action: function action() {
+	          return (0, _ui.animateCss)(dispatch, 'dashboard');
+	        },
+	        css: 'dash-btn',
+	        txt: ui.dashboard.open ? 'Close Dashboard' : 'Open Dashboard'
+	      })
 	    )
 	  );
 	};
@@ -77347,211 +77338,15 @@
 	};
 
 	var mapStateToProps = function mapStateToProps(state) {
-	  return {};
+	  return {
+	    ui: state.ui
+	  };
 	};
 
 	exports.default = (0, _reactRedux.connect)(mapStateToProps)(Toolbar);
 
 /***/ },
-/* 581 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(582);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(578)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/css-loader/index.js!./toolbar.css", function() {
-				var newContent = require("!!./../../node_modules/css-loader/index.js!./toolbar.css");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
 /* 582 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(577)();
-	// imports
-
-
-	// module
-	exports.push([module.id, ".toolbar {\n  background-color: white;\n  color: black;\n  height: 60px;\n  left: 0;\n  right: 0;\n  position: absolute;\n  text-align: center;\n  top: 0;\n}\n\n.logo {\n  height: 100%;\n  left: 0;\n  margin-top: 6px;\n  position: absolute;\n  top: 0;\n  width: 8%;\n}\n\n.circle-icon {\n  height: 48px;\n  opacity: 0.38;\n}\n\n.search {\n  font-size: 24px;\n  height: 100%;\n  left: 10%;\n  top: 0;\n  position: absolute;\n  width: 20%\n}\n\n.clock {\n  font-size: 38px;\n  height: 100%;\n  left: 28%;\n  position: absolute;\n  top: 0;\n  width: 10%;\n}\n\n.name {\n  background-color: rgba(231, 225, 218, 1);\n  font-size: 40px;\n  height: 100%;\n  left: 38%;\n  opacity: 0.75;\n  right: 38%;\n  top: 0;\n  position: absolute;\n  width: 24%;\n}\n\n.dash-link {\n  font-size: 26px;\n  height: 100%;\n  left: 62%;\n  opacity: 0.75;\n  right: 28%;\n  top: 0;\n  position: absolute;\n  width: 10%;\n}\n\n.lead-link {\n  font-size: 26px;\n  height: 100%;\n  left: 72%;\n  opacity: 0.75;\n  right: 18%;\n  top: 0;\n  position: absolute;\n  width: 10%;\n}\n\n.info-link {\n  font-size: 26px;\n  height: 100%;\n  left: 82%;\n  opacity: 0.75;\n  right: 8%;\n  top: 0;\n  position: absolute;\n  width: 10%;\n}\n\n.settings-link {\n  font-size: 26px;\n  height: 100%;\n  left: 92%;\n  opacity: 0.75;\n  right: 0;\n  top: 0;\n  position: absolute;\n  width: 8%;\n}\n\n.sub-bar {\n  font-size: 28px;\n  height: 30px;\n  position: absolute;\n  top: 60px;\n  width: 100%;\n}\n\n.section-title {\n  font-size: 28px;\n  height: 100%;\n  opacity: 0.75;\n}\n", ""]);
-
-	// exports
-
-
-/***/ },
-/* 583 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(299);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	__webpack_require__(591);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var Dashboard = function Dashboard() {
-	  return _react2.default.createElement(
-	    'div',
-	    { className: 'dashboard-container' },
-	    'Dashboard'
-	  );
-	};
-
-	exports.default = Dashboard;
-
-/***/ },
-/* 584 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(299);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	__webpack_require__(593);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var Leaderboard = function Leaderboard() {
-	  return _react2.default.createElement(
-	    'div',
-	    null,
-	    _react2.default.createElement(
-	      'h3',
-	      null,
-	      'Leaderboard'
-	    )
-	  );
-	};
-
-	exports.default = Leaderboard;
-
-/***/ },
-/* 585 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(586);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(578)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/css-loader/index.js!./main.css", function() {
-				var newContent = require("!!./../../node_modules/css-loader/index.js!./main.css");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 586 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(577)();
-	// imports
-
-
-	// module
-	exports.push([module.id, ".main {\n  border: 0;\n  font-family: Arial, sans-serif;\n  height: 100%;\n  margin: 0;\n  padding: 0;\n  vertical-align: baseline;\n  width: 100%;\n}\n", ""]);
-
-	// exports
-
-
-/***/ },
-/* 587 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.animateCss = undefined;
-
-	var _actionTypes = __webpack_require__(553);
-
-	var animateCss = exports.animateCss = function animateCss(dispatch, target) {
-	  dispatch({ target: target, type: _actionTypes.ANIMATE_CSS });
-	};
-
-/***/ },
-/* 588 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _defineProperty2 = __webpack_require__(555);
-
-	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
-
-	var _extends3 = __webpack_require__(515);
-
-	var _extends4 = _interopRequireDefault(_extends3);
-
-	var _actionTypes = __webpack_require__(553);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var ui = function ui() {
-	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-	  var action = arguments[1];
-
-	  switch (action.type) {
-	    case _actionTypes.ANIMATE_CSS:
-	      return (0, _extends4.default)({}, state, {
-	        ui: (0, _extends4.default)({}, state.ui, (0, _defineProperty3.default)({}, action.target, {
-	          animate: true,
-	          open: !state.ui[action.target].open
-	        }))
-	      });
-	    default:
-	      return state;
-	  }
-	};
-
-	exports.default = ui;
-
-/***/ },
-/* 589 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -77578,7 +77373,7 @@
 	  );
 	};
 
-	Toolbar.propTypes = {
+	TxtBtn.propTypes = {
 	  action: _react2.default.PropTypes.func.isRequired,
 	  css: _react2.default.PropTypes.string.isRequired,
 	  txt: _react2.default.PropTypes.string.isRequired
@@ -77587,17 +77382,165 @@
 	exports.default = TxtBtn;
 
 /***/ },
-/* 590 */,
-/* 591 */
+/* 583 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.animateCss = undefined;
+
+	var _actionTypes = __webpack_require__(553);
+
+	var animateCss = exports.animateCss = function animateCss(dispatch, target) {
+	  dispatch({ target: target, type: _actionTypes.ANIMATE_CSS });
+	};
+
+/***/ },
+/* 584 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(592);
+	var content = __webpack_require__(585);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(578)(content, {});
+	var update = __webpack_require__(579)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../node_modules/css-loader/index.js!./toolbar.css", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js!./toolbar.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 585 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(578)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".toolbar {\n  /*background-color: white;*/\n  color: black;\n  height: 60px;\n  left: 0;\n  right: 0;\n  position: absolute;\n  text-align: center;\n  top: 0;\n}\n\n.dash-btn-container {\n  background: white;\n  box-shadow: 0px 2px 20px #888888;\n  color: rgba(0, 0, 0, 0.68);\n  font-size: 16px;\n  font-weight: bold;\n  height: 18px;\n  left: 40%;\n  letter-spacing: 1.5px;\n  padding: 12px 9px;\n  right: 40%%;\n  top: 0;\n  position: absolute;\n  width: 20%;\n}\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 586 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(299);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(496);
+
+	var _GoogleProfile = __webpack_require__(597);
+
+	var _GoogleProfile2 = _interopRequireDefault(_GoogleProfile);
+
+	var _animation = __webpack_require__(596);
+
+	__webpack_require__(587);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Dashboard = function Dashboard(_ref) {
+	  var animate = _ref.animate,
+	      dispatch = _ref.dispatch,
+	      open = _ref.open,
+	      user = _ref.user;
+
+	  var css = animate ? open ? _animation.OPEN_DASHBOARD : _animation.CLOSE_DASHBOARD : _animation.BASE_DASHBOARD;
+
+	  return _react2.default.createElement(
+	    'div',
+	    { className: css },
+	    _react2.default.createElement(_GoogleProfile2.default, {
+	      email: user.email,
+	      name: user.displayName,
+	      photoURL: user.photoURL
+	      // TODO: add logout w/ providerId & uid
+	    }),
+	    _react2.default.createElement(
+	      'div',
+	      null,
+	      'Explore the graph'
+	    ),
+	    _react2.default.createElement(
+	      'div',
+	      null,
+	      'Ask a question'
+	    ),
+	    _react2.default.createElement(
+	      'div',
+	      null,
+	      'Boost your reputation'
+	    ),
+	    _react2.default.createElement(
+	      'div',
+	      null,
+	      'See where you rank'
+	    ),
+	    _react2.default.createElement(
+	      'div',
+	      null,
+	      'Read our guides'
+	    ),
+	    _react2.default.createElement(
+	      'div',
+	      null,
+	      'Test your knowledge'
+	    )
+	  );
+	};
+
+	Dashboard.propTypes = {
+	  animate: _react2.default.PropTypes.bool.isRequired,
+	  open: _react2.default.PropTypes.bool.isRequired,
+	  user: _react2.default.PropTypes.object.isRequired
+	};
+
+	var mapStateToProps = function mapStateToProps(state) {
+	  return {
+	    animate: state.ui.dashboard.animate,
+	    open: state.ui.dashboard.open,
+	    user: state.firebase.user.providerData[0]
+	  };
+	};
+
+	exports.default = (0, _reactRedux.connect)(mapStateToProps)(Dashboard);
+
+/***/ },
+/* 587 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(588);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(579)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -77614,37 +77557,40 @@
 	}
 
 /***/ },
-/* 592 */
+/* 588 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(577)();
+	exports = module.exports = __webpack_require__(578)();
 	// imports
 
 
 	// module
-	exports.push([module.id, "@keyframes closeDashboard {\n\tfrom { transform: translateX(0); }\n\tto { transform: translateX(-100%); }\n}\n\n@keyframes openDashboard {\n\tfrom { transform: translateX(-100%); }\n\tto { transform: translateX(0); }\n}\n\n.close-dashboard {\n\tanimation-name: closeDashboard;\n\tanimation-duration: 0.8s;\n\tanimation-fill-mode: forwards;\n}\n\n.open-dashboard {\n\tanimation-name: openDashboard;\n\tanimation-duration: 0.8s;\n\tanimation-fill-mode: forwards;\n}\n\n.dashboard-container {\n  background-color: #eecb9b;\n  bottom: 0;\n  height: 100%;\n  margin-top: 120px;\n  position: absolute;\n  right: 0;\n  transform: translateX(100%);\n  width: 38%;\n}\n", ""]);
+	exports.push([module.id, "@keyframes closeDashboard {\n\tfrom { transform: translateX(0); }\n\tto { transform: translateX(100%); }\n}\n\n@keyframes openDashboard {\n\tfrom { transform: translateX(100%); }\n\tto { transform: translateX(0); }\n}\n\n.close-dashboard {\n\tanimation-name: closeDashboard;\n\tanimation-duration: 0.8s;\n\tanimation-fill-mode: forwards;\n}\n\n.open-dashboard {\n\tanimation-name: openDashboard;\n\tanimation-duration: 0.8s;\n\tanimation-fill-mode: forwards;\n}\n\n.dashboard-container {\n  background-color: white;\n  box-shadow: 0px 2px 20px #888888;\n  bottom: 0;\n  padding: 12px;\n  position: absolute;\n  right: 0;\n  top: 0;\n  transform: translateX(100%);\n  width: 24%;\n}\n", ""]);
 
 	// exports
 
 
 /***/ },
-/* 593 */
+/* 589 */,
+/* 590 */,
+/* 591 */,
+/* 592 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(594);
+	var content = __webpack_require__(593);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(578)(content, {});
+	var update = __webpack_require__(579)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/css-loader/index.js!./leaderboard.css", function() {
-				var newContent = require("!!./../../node_modules/css-loader/index.js!./leaderboard.css");
+			module.hot.accept("!!./../../node_modules/css-loader/index.js!./main.css", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js!./main.css");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -77654,15 +77600,130 @@
 	}
 
 /***/ },
-/* 594 */
+/* 593 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(577)();
+	exports = module.exports = __webpack_require__(578)();
 	// imports
 
 
 	// module
-	exports.push([module.id, "", ""]);
+	exports.push([module.id, ".main {\n  border: 0;\n  font-family: Arial, sans-serif;\n  height: 100%;\n  margin: 0;\n  padding: 0;\n  vertical-align: baseline;\n  width: 100%;\n}\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 594 */,
+/* 595 */,
+/* 596 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var BASE_DASHBOARD = exports.BASE_DASHBOARD = 'dashboard-container';
+	var OPEN_DASHBOARD = exports.OPEN_DASHBOARD = BASE_DASHBOARD + ' open-dashboard';
+	var CLOSE_DASHBOARD = exports.CLOSE_DASHBOARD = BASE_DASHBOARD + ' close-dashboard';
+
+/***/ },
+/* 597 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(299);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	__webpack_require__(598);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var GoogleProfile = function GoogleProfile(_ref) {
+	  var email = _ref.email,
+	      name = _ref.name,
+	      photoURL = _ref.photoURL;
+
+	  return _react2.default.createElement(
+	    'div',
+	    { className: 'gp-container' },
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'gp-photo-container' },
+	      _react2.default.createElement('img', {
+	        alt: 'Google Profile Photo',
+	        className: 'gp-photo',
+	        src: photoURL
+	      })
+	    ),
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'gp-text-container' },
+	      _react2.default.createElement(
+	        'h1',
+	        { className: 'gp-name' },
+	        name
+	      ),
+	      _react2.default.createElement(
+	        'span',
+	        { className: 'gp-email' },
+	        email
+	      )
+	    )
+	  );
+	};
+
+	GoogleProfile.propTypes = {
+	  email: _react2.default.PropTypes.string.isRequired,
+	  name: _react2.default.PropTypes.string.isRequired,
+	  photoURL: _react2.default.PropTypes.string
+	};
+
+	exports.default = GoogleProfile;
+
+/***/ },
+/* 598 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(599);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(579)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../node_modules/css-loader/index.js!./googleProfile.css", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js!./googleProfile.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 599 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(578)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".gp-container {\n  width: 100%;\n}\n\n.gp-photo-container {\n  border-radius: 50%;\n  height: 150px;\n  margin: 0 auto;\n  overflow: hidden;\n  width: 150px;\n}\n\n.gp-photo {\n  display: inline;\n  margin: 0 auto;\n  height: 100%;\n  width: auto;\n}\n\n.gp-text-container {\n  width: 100%;\n  text-align: center;\n}\n\n.gp-name {\n  color: rgba(0, 0, 0, 0.62);\n  font-size: 26px;\n}\n\n.gp-email {\n  font-size: 14px;\n}\n", ""]);
 
 	// exports
 
