@@ -4,7 +4,6 @@ import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import reducer from './reducers/index'
 import Root from './containers/Root'
-import renderGraph from './graph.js'
 
 const store = createStore(reducer)
 
@@ -14,5 +13,3 @@ render(
   </Provider>,
   document.getElementById('app')
 )
-
-renderGraph()

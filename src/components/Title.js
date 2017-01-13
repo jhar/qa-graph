@@ -9,7 +9,8 @@ import {
 } from '../constants/text'
 import '../style/title.css'
 
-const Title = ({ googleAuthPopup }) => {
+
+const Title = ({ googleAuth }) => {
   return (
     <div className="title-view">
       <div className="title-center-container">
@@ -22,7 +23,7 @@ const Title = ({ googleAuthPopup }) => {
         <img
           alt="Google Sign In Button"
           className="google-sign-in"
-          onClick={googleAuthPopup}
+          onClick={googleAuth}
           src={GOOGLE_SIGN_IN_SRC}
         />
       </div>
@@ -36,7 +37,7 @@ const Title = ({ googleAuthPopup }) => {
 }
 
 Title.propTypes = {
-  googleAuthPopup: React.PropTypes.func.isRequired
+  googleAuth: React.PropTypes.func.isRequired
 }
 
 export default Title

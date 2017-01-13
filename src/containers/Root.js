@@ -1,20 +1,23 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { firebase, provider } from '../firebase'
-import { googleAuthPopup } from '../actions/firebase'
+import { googleAuth } from '../actions/firebase'
+import { controlScene } from '../actions/three'
+import startTitle from '../three/title'
+import startMain from '../three/main'
 import Title from '../components/Title'
 import Main from '../components/Main'
 
 const Root = ({ dispatch, user }) => {
-  if (!user) {
-    return (
-      <Title
-        googleAuthPopup={() => googleAuthPopup(dispatch, firebase, provider)}
-      />
+  return (
+    user ? (
+      controlScene(dispatch, 'main', true, startMain),
+      <Main />
+    ) : (
+      controlScene(dispatch, 'title', true, startTitle),
+      <Title googleAuth={() => googleAuth(dispatch, firebase, provider)} />
     )
-  } else {
-    return <Main />
-  }
+  )
 }
 
 Root.propTypes = {

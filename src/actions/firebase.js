@@ -1,15 +1,13 @@
 import { GOOGLE_AUTH } from '../constants/actionTypes'
 
-const googleAuth = (token, user) => ({
-  token,
-  type: GOOGLE_AUTH,
-  user
-})
-
-export const googleAuthPopup = (dispatch, firebase, provider) => {
+export const googleAuth = (dispatch, firebase, provider) => {
   firebase.auth().signInWithPopup(provider)
     .then(result => {
-      dispatch(googleAuth(result.credential.accessToken, result.user))
+      dispatch({
+        token: result.credential.accessToken,
+        type: GOOGLE_AUTH,
+        user: result.user
+      })
     })
     .catch(error => {
       console.log(error.code)

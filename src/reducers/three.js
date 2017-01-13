@@ -1,11 +1,14 @@
-import { THREE_INIT } from '../constants/actionTypes'
+import { CONTROL_SCENE } from '../constants/actionTypes'
 
 const three = (state = {}, action) => {
   switch (action.type) {
-    case THREE_INIT:
+    case CONTROL_SCENE:
       return {
         ...state,
-        init: true
+        animating: {
+          ...state.animating,
+          [action.name]: action.animating
+        }
       }
     default:
       return state

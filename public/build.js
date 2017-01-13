@@ -8208,13 +8208,9 @@
 
 	var _index2 = _interopRequireDefault(_index);
 
-	var _Root = __webpack_require__(555);
+	var _Root = __webpack_require__(559);
 
 	var _Root2 = _interopRequireDefault(_Root);
-
-	var _graph = __webpack_require__(577);
-
-	var _graph2 = _interopRequireDefault(_graph);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -8225,8 +8221,6 @@
 	  { store: store },
 	  _react2.default.createElement(_Root2.default, null)
 	), document.getElementById('app'));
-
-	(0, _graph2.default)();
 
 /***/ },
 /* 299 */
@@ -32299,7 +32293,7 @@
 	  value: true
 	});
 	var GOOGLE_AUTH = exports.GOOGLE_AUTH = 'GOOGLE_AUTH';
-	var THREE_INIT = exports.THREE_INIT = 'THREE_INIT';
+	var CONTROL_SCENE = exports.CONTROL_SCENE = 'CONTROL_SCENE';
 
 /***/ },
 /* 554 */
@@ -32311,9 +32305,13 @@
 	  value: true
 	});
 
-	var _extends2 = __webpack_require__(515);
+	var _defineProperty2 = __webpack_require__(555);
 
-	var _extends3 = _interopRequireDefault(_extends2);
+	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
+
+	var _extends3 = __webpack_require__(515);
+
+	var _extends4 = _interopRequireDefault(_extends3);
 
 	var _actionTypes = __webpack_require__(553);
 
@@ -32324,9 +32322,9 @@
 	  var action = arguments[1];
 
 	  switch (action.type) {
-	    case _actionTypes.THREE_INIT:
-	      return (0, _extends3.default)({}, state, {
-	        init: true
+	    case _actionTypes.CONTROL_SCENE:
+	      return (0, _extends4.default)({}, state, {
+	        animating: (0, _extends4.default)({}, state.animating, (0, _defineProperty3.default)({}, action.name, action.animating))
 	      });
 	    default:
 	      return state;
@@ -32337,6 +32335,59 @@
 
 /***/ },
 /* 555 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	exports.__esModule = true;
+
+	var _defineProperty = __webpack_require__(556);
+
+	var _defineProperty2 = _interopRequireDefault(_defineProperty);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = function (obj, key, value) {
+	  if (key in obj) {
+	    (0, _defineProperty2.default)(obj, key, {
+	      value: value,
+	      enumerable: true,
+	      configurable: true,
+	      writable: true
+	    });
+	  } else {
+	    obj[key] = value;
+	  }
+
+	  return obj;
+	};
+
+/***/ },
+/* 556 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = { "default": __webpack_require__(557), __esModule: true };
+
+/***/ },
+/* 557 */
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(558);
+	var $Object = __webpack_require__(521).Object;
+	module.exports = function defineProperty(it, key, desc){
+	  return $Object.defineProperty(it, key, desc);
+	};
+
+/***/ },
+/* 558 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var $export = __webpack_require__(519);
+	// 19.1.2.4 / 15.2.3.6 Object.defineProperty(O, P, Attributes)
+	$export($export.S + $export.F * !__webpack_require__(529), 'Object', {defineProperty: __webpack_require__(525).f});
+
+/***/ },
+/* 559 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32351,15 +32402,25 @@
 
 	var _reactRedux = __webpack_require__(496);
 
-	var _firebase = __webpack_require__(556);
+	var _firebase = __webpack_require__(560);
 
-	var _firebase2 = __webpack_require__(563);
+	var _firebase2 = __webpack_require__(567);
 
-	var _Title = __webpack_require__(564);
+	var _three = __webpack_require__(568);
+
+	var _title = __webpack_require__(569);
+
+	var _title2 = _interopRequireDefault(_title);
+
+	var _main = __webpack_require__(571);
+
+	var _main2 = _interopRequireDefault(_main);
+
+	var _Title = __webpack_require__(594);
 
 	var _Title2 = _interopRequireDefault(_Title);
 
-	var _Main = __webpack_require__(571);
+	var _Main = __webpack_require__(601);
 
 	var _Main2 = _interopRequireDefault(_Main);
 
@@ -32369,15 +32430,9 @@
 	  var dispatch = _ref.dispatch,
 	      user = _ref.user;
 
-	  if (!user) {
-	    return _react2.default.createElement(_Title2.default, {
-	      googleAuthPopup: function googleAuthPopup() {
-	        return (0, _firebase2.googleAuthPopup)(dispatch, _firebase.firebase, _firebase.provider);
-	      }
-	    });
-	  } else {
-	    return _react2.default.createElement(_Main2.default, null);
-	  }
+	  return user ? ((0, _three.controlScene)(dispatch, 'main', true, _main2.default), _react2.default.createElement(_Main2.default, null)) : ((0, _three.controlScene)(dispatch, 'title', true, _title2.default), _react2.default.createElement(_Title2.default, { googleAuth: function googleAuth() {
+	      return (0, _firebase2.googleAuth)(dispatch, _firebase.firebase, _firebase.provider);
+	    } }));
 	};
 
 	Root.propTypes = {
@@ -32394,7 +32449,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps)(Root);
 
 /***/ },
-/* 556 */
+/* 560 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -32404,7 +32459,7 @@
 	});
 	exports.provider = exports.firebase = undefined;
 
-	var _firebase = __webpack_require__(557);
+	var _firebase = __webpack_require__(561);
 
 	var _firebase2 = _interopRequireDefault(_firebase);
 
@@ -32424,7 +32479,7 @@
 	exports.provider = provider;
 
 /***/ },
-/* 557 */
+/* 561 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -32434,16 +32489,16 @@
 	 *
 	 *   firebase = require('firebase');
 	 */
-	var firebase = __webpack_require__(558);
-	__webpack_require__(559);
-	__webpack_require__(560);
-	__webpack_require__(561);
-	__webpack_require__(562);
+	var firebase = __webpack_require__(562);
+	__webpack_require__(563);
+	__webpack_require__(564);
+	__webpack_require__(565);
+	__webpack_require__(566);
 	module.exports = firebase;
 
 
 /***/ },
-/* 558 */
+/* 562 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {var firebase = (function(){
@@ -32483,10 +32538,10 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 559 */
+/* 563 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(global) {var firebase = __webpack_require__(558);
+	/* WEBPACK VAR INJECTION */(function(global) {var firebase = __webpack_require__(562);
 	(function(){
 	/*! @license Firebase v3.6.4
 	    Build: 3.6.4-rc.2
@@ -32729,10 +32784,10 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 560 */
+/* 564 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(global) {var firebase = __webpack_require__(558);
+	/* WEBPACK VAR INJECTION */(function(global) {var firebase = __webpack_require__(562);
 	(function(){
 	/*! @license Firebase v3.6.4
 	    Build: 3.6.4-rc.2
@@ -33000,10 +33055,10 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 561 */
+/* 565 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(global) {var firebase = __webpack_require__(558);
+	/* WEBPACK VAR INJECTION */(function(global) {var firebase = __webpack_require__(562);
 	(function(){
 	/*! @license Firebase v3.6.4
 	    Build: 3.6.4-rc.2
@@ -33058,10 +33113,10 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 562 */
+/* 566 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(global) {var firebase = __webpack_require__(558);
+	/* WEBPACK VAR INJECTION */(function(global) {var firebase = __webpack_require__(562);
 	(function(){
 	/*! @license Firebase v3.6.4
 	    Build: 3.6.4-rc.2
@@ -33104,7 +33159,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 563 */
+/* 567 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33112,21 +33167,17 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.googleAuthPopup = undefined;
+	exports.googleAuth = undefined;
 
 	var _actionTypes = __webpack_require__(553);
 
-	var googleAuth = function googleAuth(token, user) {
-	  return {
-	    token: token,
-	    type: _actionTypes.GOOGLE_AUTH,
-	    user: user
-	  };
-	};
-
-	var googleAuthPopup = exports.googleAuthPopup = function googleAuthPopup(dispatch, firebase, provider) {
+	var googleAuth = exports.googleAuth = function googleAuth(dispatch, firebase, provider) {
 	  firebase.auth().signInWithPopup(provider).then(function (result) {
-	    dispatch(googleAuth(result.credential.accessToken, result.user));
+	    dispatch({
+	      token: result.credential.accessToken,
+	      type: _actionTypes.GOOGLE_AUTH,
+	      user: result.user
+	    });
 	  }).catch(function (error) {
 	    console.log(error.code);
 	    console.log(error.message);
@@ -33136,461 +33187,30 @@
 	};
 
 /***/ },
-/* 564 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(299);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _images = __webpack_require__(565);
-
-	var _text = __webpack_require__(566);
-
-	__webpack_require__(567);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var Title = function Title(_ref) {
-	  var googleAuthPopup = _ref.googleAuthPopup;
-
-	  return _react2.default.createElement(
-	    'div',
-	    { className: 'title-view' },
-	    _react2.default.createElement(
-	      'div',
-	      { className: 'title-center-container' },
-	      _react2.default.createElement(
-	        'h1',
-	        { className: 'title-header' },
-	        _text.TITLE_HEADER
-	      ),
-	      _react2.default.createElement(
-	        'h3',
-	        { className: 'title-sub' },
-	        _text.TITLE_DESCRIPTION
-	      ),
-	      _react2.default.createElement('img', {
-	        alt: 'Google Sign In Button',
-	        className: 'google-sign-in',
-	        onClick: googleAuthPopup,
-	        src: _images.GOOGLE_SIGN_IN_SRC
-	      })
-	    ),
-	    _react2.default.createElement(
-	      'div',
-	      { className: 'title-lower-container' },
-	      _react2.default.createElement(
-	        'span',
-	        { className: 'title-small' },
-	        'Version ',
-	        _text.TITLE_VERSION
-	      ),
-	      _react2.default.createElement('br', null),
-	      _react2.default.createElement(
-	        'span',
-	        { className: 'title-small' },
-	        'Written by ',
-	        _text.TITLE_AUTHOR
-	      ),
-	      _react2.default.createElement('br', null),
-	      _react2.default.createElement(
-	        'span',
-	        { className: 'title-small' },
-	        _text.TITLE_EMAIL
-	      )
-	    )
-	  );
-	};
-
-	Title.propTypes = {
-	  googleAuthPopup: _react2.default.PropTypes.func.isRequired
-	};
-
-	exports.default = Title;
-
-/***/ },
-/* 565 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	var GOOGLE_SIGN_IN_SRC = exports.GOOGLE_SIGN_IN_SRC = 'images/googleSignIn.png';
-
-/***/ },
-/* 566 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	var TITLE_AUTHOR = exports.TITLE_AUTHOR = 'Justin A. Harrison';
-	var TITLE_DESCRIPTION = exports.TITLE_DESCRIPTION = 'A Visual Dialogue of Wisdom from Wondering';
-	var TITLE_EMAIL = exports.TITLE_EMAIL = 'justinadenharrison@gmail.com';
-	var TITLE_HEADER = exports.TITLE_HEADER = 'Sographes';
-	var TITLE_VERSION = exports.TITLE_VERSION = '0.0.0';
-
-/***/ },
-/* 567 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(568);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(570)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/css-loader/index.js!./title.css", function() {
-				var newContent = require("!!./../../node_modules/css-loader/index.js!./title.css");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
 /* 568 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(569)();
-	// imports
+	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.controlScene = undefined;
 
-	// module
-	exports.push([module.id, ".title-view {\n  background: rgba(255, 255, 255, 0.38);\n  height: 100%;\n  left: 0;\n  position: absolute;\n  top: 0;\n  width: 100%;\n}\n\n.title-center-container {\n  background: rgba(255, 255, 255, 0.86);\n  border-radius: 4%;\n  box-shadow: 0px 2px 20px #888888;\n  margin: 32% auto 0 auto;\n  min-width: 300px;\n  padding: 3%;\n  text-align: center;\n  width: 38%;\n}\n\n.title-header {\n  color: rgba(0, 0, 0, 0.86);\n  font-size: 300%;\n  top: 38%;\n}\n\n.title-sub {\n  color: rgba(0, 0, 0, 0.62);\n  font-size: 160%;\n}\n\n.title-lower-container {\n  position: absolute;\n  bottom: 2%;\n  left: 2%;\n}\n\n.title-small {\n\n}\n\n.google-sign-in {\n  display: block;\n  height: 50px;\n  margin: 0 auto;\n}\n", ""]);
+	var _actionTypes = __webpack_require__(553);
 
-	// exports
+	var controlScene = exports.controlScene = function controlScene(dispatch, scene, animate, ctrl) {
+	  if (animate) {
+	    ctrl();
+	  } else {
+	    cancelAnimationFrame(ctrl());
+	  }
 
+	  dispatch({ animate: animate, scene: scene, type: _actionTypes.CONTROL_SCENE });
+	};
 
 /***/ },
 /* 569 */
-/***/ function(module, exports) {
-
-	/*
-		MIT License http://www.opensource.org/licenses/mit-license.php
-		Author Tobias Koppers @sokra
-	*/
-	// css base code, injected by the css-loader
-	module.exports = function() {
-		var list = [];
-
-		// return the list of modules as css string
-		list.toString = function toString() {
-			var result = [];
-			for(var i = 0; i < this.length; i++) {
-				var item = this[i];
-				if(item[2]) {
-					result.push("@media " + item[2] + "{" + item[1] + "}");
-				} else {
-					result.push(item[1]);
-				}
-			}
-			return result.join("");
-		};
-
-		// import a list of modules into the list
-		list.i = function(modules, mediaQuery) {
-			if(typeof modules === "string")
-				modules = [[null, modules, ""]];
-			var alreadyImportedModules = {};
-			for(var i = 0; i < this.length; i++) {
-				var id = this[i][0];
-				if(typeof id === "number")
-					alreadyImportedModules[id] = true;
-			}
-			for(i = 0; i < modules.length; i++) {
-				var item = modules[i];
-				// skip already imported module
-				// this implementation is not 100% perfect for weird media query combinations
-				//  when a module is imported multiple times with different media queries.
-				//  I hope this will never occur (Hey this way we have smaller bundles)
-				if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-					if(mediaQuery && !item[2]) {
-						item[2] = mediaQuery;
-					} else if(mediaQuery) {
-						item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
-					}
-					list.push(item);
-				}
-			}
-		};
-		return list;
-	};
-
-
-/***/ },
-/* 570 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/*
-		MIT License http://www.opensource.org/licenses/mit-license.php
-		Author Tobias Koppers @sokra
-	*/
-	var stylesInDom = {},
-		memoize = function(fn) {
-			var memo;
-			return function () {
-				if (typeof memo === "undefined") memo = fn.apply(this, arguments);
-				return memo;
-			};
-		},
-		isOldIE = memoize(function() {
-			return /msie [6-9]\b/.test(window.navigator.userAgent.toLowerCase());
-		}),
-		getHeadElement = memoize(function () {
-			return document.head || document.getElementsByTagName("head")[0];
-		}),
-		singletonElement = null,
-		singletonCounter = 0,
-		styleElementsInsertedAtTop = [];
-
-	module.exports = function(list, options) {
-		if(false) {
-			if(typeof document !== "object") throw new Error("The style-loader cannot be used in a non-browser environment");
-		}
-
-		options = options || {};
-		// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
-		// tags it will allow on a page
-		if (typeof options.singleton === "undefined") options.singleton = isOldIE();
-
-		// By default, add <style> tags to the bottom of <head>.
-		if (typeof options.insertAt === "undefined") options.insertAt = "bottom";
-
-		var styles = listToStyles(list);
-		addStylesToDom(styles, options);
-
-		return function update(newList) {
-			var mayRemove = [];
-			for(var i = 0; i < styles.length; i++) {
-				var item = styles[i];
-				var domStyle = stylesInDom[item.id];
-				domStyle.refs--;
-				mayRemove.push(domStyle);
-			}
-			if(newList) {
-				var newStyles = listToStyles(newList);
-				addStylesToDom(newStyles, options);
-			}
-			for(var i = 0; i < mayRemove.length; i++) {
-				var domStyle = mayRemove[i];
-				if(domStyle.refs === 0) {
-					for(var j = 0; j < domStyle.parts.length; j++)
-						domStyle.parts[j]();
-					delete stylesInDom[domStyle.id];
-				}
-			}
-		};
-	}
-
-	function addStylesToDom(styles, options) {
-		for(var i = 0; i < styles.length; i++) {
-			var item = styles[i];
-			var domStyle = stylesInDom[item.id];
-			if(domStyle) {
-				domStyle.refs++;
-				for(var j = 0; j < domStyle.parts.length; j++) {
-					domStyle.parts[j](item.parts[j]);
-				}
-				for(; j < item.parts.length; j++) {
-					domStyle.parts.push(addStyle(item.parts[j], options));
-				}
-			} else {
-				var parts = [];
-				for(var j = 0; j < item.parts.length; j++) {
-					parts.push(addStyle(item.parts[j], options));
-				}
-				stylesInDom[item.id] = {id: item.id, refs: 1, parts: parts};
-			}
-		}
-	}
-
-	function listToStyles(list) {
-		var styles = [];
-		var newStyles = {};
-		for(var i = 0; i < list.length; i++) {
-			var item = list[i];
-			var id = item[0];
-			var css = item[1];
-			var media = item[2];
-			var sourceMap = item[3];
-			var part = {css: css, media: media, sourceMap: sourceMap};
-			if(!newStyles[id])
-				styles.push(newStyles[id] = {id: id, parts: [part]});
-			else
-				newStyles[id].parts.push(part);
-		}
-		return styles;
-	}
-
-	function insertStyleElement(options, styleElement) {
-		var head = getHeadElement();
-		var lastStyleElementInsertedAtTop = styleElementsInsertedAtTop[styleElementsInsertedAtTop.length - 1];
-		if (options.insertAt === "top") {
-			if(!lastStyleElementInsertedAtTop) {
-				head.insertBefore(styleElement, head.firstChild);
-			} else if(lastStyleElementInsertedAtTop.nextSibling) {
-				head.insertBefore(styleElement, lastStyleElementInsertedAtTop.nextSibling);
-			} else {
-				head.appendChild(styleElement);
-			}
-			styleElementsInsertedAtTop.push(styleElement);
-		} else if (options.insertAt === "bottom") {
-			head.appendChild(styleElement);
-		} else {
-			throw new Error("Invalid value for parameter 'insertAt'. Must be 'top' or 'bottom'.");
-		}
-	}
-
-	function removeStyleElement(styleElement) {
-		styleElement.parentNode.removeChild(styleElement);
-		var idx = styleElementsInsertedAtTop.indexOf(styleElement);
-		if(idx >= 0) {
-			styleElementsInsertedAtTop.splice(idx, 1);
-		}
-	}
-
-	function createStyleElement(options) {
-		var styleElement = document.createElement("style");
-		styleElement.type = "text/css";
-		insertStyleElement(options, styleElement);
-		return styleElement;
-	}
-
-	function createLinkElement(options) {
-		var linkElement = document.createElement("link");
-		linkElement.rel = "stylesheet";
-		insertStyleElement(options, linkElement);
-		return linkElement;
-	}
-
-	function addStyle(obj, options) {
-		var styleElement, update, remove;
-
-		if (options.singleton) {
-			var styleIndex = singletonCounter++;
-			styleElement = singletonElement || (singletonElement = createStyleElement(options));
-			update = applyToSingletonTag.bind(null, styleElement, styleIndex, false);
-			remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true);
-		} else if(obj.sourceMap &&
-			typeof URL === "function" &&
-			typeof URL.createObjectURL === "function" &&
-			typeof URL.revokeObjectURL === "function" &&
-			typeof Blob === "function" &&
-			typeof btoa === "function") {
-			styleElement = createLinkElement(options);
-			update = updateLink.bind(null, styleElement);
-			remove = function() {
-				removeStyleElement(styleElement);
-				if(styleElement.href)
-					URL.revokeObjectURL(styleElement.href);
-			};
-		} else {
-			styleElement = createStyleElement(options);
-			update = applyToTag.bind(null, styleElement);
-			remove = function() {
-				removeStyleElement(styleElement);
-			};
-		}
-
-		update(obj);
-
-		return function updateStyle(newObj) {
-			if(newObj) {
-				if(newObj.css === obj.css && newObj.media === obj.media && newObj.sourceMap === obj.sourceMap)
-					return;
-				update(obj = newObj);
-			} else {
-				remove();
-			}
-		};
-	}
-
-	var replaceText = (function () {
-		var textStore = [];
-
-		return function (index, replacement) {
-			textStore[index] = replacement;
-			return textStore.filter(Boolean).join('\n');
-		};
-	})();
-
-	function applyToSingletonTag(styleElement, index, remove, obj) {
-		var css = remove ? "" : obj.css;
-
-		if (styleElement.styleSheet) {
-			styleElement.styleSheet.cssText = replaceText(index, css);
-		} else {
-			var cssNode = document.createTextNode(css);
-			var childNodes = styleElement.childNodes;
-			if (childNodes[index]) styleElement.removeChild(childNodes[index]);
-			if (childNodes.length) {
-				styleElement.insertBefore(cssNode, childNodes[index]);
-			} else {
-				styleElement.appendChild(cssNode);
-			}
-		}
-	}
-
-	function applyToTag(styleElement, obj) {
-		var css = obj.css;
-		var media = obj.media;
-
-		if(media) {
-			styleElement.setAttribute("media", media)
-		}
-
-		if(styleElement.styleSheet) {
-			styleElement.styleSheet.cssText = css;
-		} else {
-			while(styleElement.firstChild) {
-				styleElement.removeChild(styleElement.firstChild);
-			}
-			styleElement.appendChild(document.createTextNode(css));
-		}
-	}
-
-	function updateLink(linkElement, obj) {
-		var css = obj.css;
-		var sourceMap = obj.sourceMap;
-
-		if(sourceMap) {
-			// http://stackoverflow.com/a/26603875
-			css += "\n/*# sourceMappingURL=data:application/json;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + " */";
-		}
-
-		var blob = new Blob([css], { type: "text/css" });
-
-		var oldSrc = linkElement.href;
-
-		linkElement.href = URL.createObjectURL(blob);
-
-		if(oldSrc)
-			URL.revokeObjectURL(oldSrc);
-	}
-
-
-/***/ },
-/* 571 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33599,202 +33219,29 @@
 	  value: true
 	});
 
-	var _react = __webpack_require__(299);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _Toolbar = __webpack_require__(572);
-
-	var _Toolbar2 = _interopRequireDefault(_Toolbar);
-
-	var _Dashboard = __webpack_require__(575);
-
-	var _Dashboard2 = _interopRequireDefault(_Dashboard);
-
-	var _Leaderboard = __webpack_require__(576);
-
-	var _Leaderboard2 = _interopRequireDefault(_Leaderboard);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var Main = function Main() {
-	  return _react2.default.createElement(
-	    'div',
-	    null,
-	    _react2.default.createElement(_Toolbar2.default, null),
-	    _react2.default.createElement(_Dashboard2.default, null),
-	    _react2.default.createElement(_Leaderboard2.default, null)
-	  );
-	};
-
-	exports.default = Main;
-
-/***/ },
-/* 572 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(299);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	__webpack_require__(573);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var Toolbar = function Toolbar() {
-	  return _react2.default.createElement(
-	    'div',
-	    { className: 'ui-toolbar' },
-	    _react2.default.createElement(
-	      'h3',
-	      null,
-	      'Toolbar'
-	    )
-	  );
-	};
-
-	exports.default = Toolbar;
-
-/***/ },
-/* 573 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(574);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(570)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/css-loader/index.js!./toolbar.css", function() {
-				var newContent = require("!!./../../node_modules/css-loader/index.js!./toolbar.css");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 574 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(569)();
-	// imports
-
-
-	// module
-	exports.push([module.id, ".ui-toolbar {\n  background-color: white;\n  color: black;\n  font: Helvetica;\n}\n", ""]);
-
-	// exports
-
-
-/***/ },
-/* 575 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(299);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var Dashboard = function Dashboard() {
-	  return _react2.default.createElement(
-	    'div',
-	    null,
-	    _react2.default.createElement(
-	      'h3',
-	      null,
-	      'Dashboard'
-	    )
-	  );
-	};
-
-	exports.default = Dashboard;
-
-/***/ },
-/* 576 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(299);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var Leaderboard = function Leaderboard() {
-	  return _react2.default.createElement(
-	    'div',
-	    null,
-	    _react2.default.createElement(
-	      'h3',
-	      null,
-	      'Leaderboard'
-	    )
-	  );
-	};
-
-	exports.default = Leaderboard;
-
-/***/ },
-/* 577 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _three = __webpack_require__(578);
+	var _three = __webpack_require__(570);
 
 	var THREE = _interopRequireWildcard(_three);
 
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
-	var time = new THREE.Clock();
-
-	var domElement = document.getElementById('graph');
-	var farClippingPlane = 1000;
-	var fieldOfView = 75;
-	var nearClippingPlane = 0.01;
-
+	// Scene configuration
 	var scene = new THREE.Scene();
 	scene.background = new THREE.Color(0xf7f6f5);
-	var camera = new THREE.PerspectiveCamera(fieldOfView, window.innerWidth / window.innerHeight, nearClippingPlane, farClippingPlane);
+
+	// Camera configuration
+	var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.01, 1000);
+	camera.position.z = 5;
+
+	// Renderer configuration
 	var renderer = new THREE.WebGLRenderer({
 	  alpha: true,
 	  antialias: true,
-	  canvas: domElement
+	  canvas: document.getElementById('graph')
 	});
-
 	renderer.setSize(window.innerWidth, window.innerHeight);
 
+	// Constructs and returns a sphere mesh
 	function sphere(radius, sw, sh, color, opacity) {
 	  return new THREE.Mesh(new THREE.SphereBufferGeometry(radius, sw, sh), new THREE.MeshBasicMaterial({
 	    color: color,
@@ -33804,66 +33251,45 @@
 	  }));
 	}
 
-	// Recursively instantiate shapes
+	// Recursively instantiate spheres and add them to the scene
 	function shapes(n, base) {
 	  if (n < base) {
 	    var rV = Math.random();
 	    var shape = sphere(Math.random(), 8, 8, new THREE.Color(rV, rV, rV), rV * 0.62);
 	    shape.position.set(Math.random() * 8 - 4, Math.random() * 8 - 4, Math.random() * 10 - 5);
 	    shape.velocity = new THREE.Vector3(0, 0, Math.random() * 0.02 - 0.01);
-	    // shape.acceleration = new THREE.Vector3(
-	    //   Math.random() * 0.0002 - 0.0001,
-	    //   Math.random() * 0.0002 - 0.0001,
-	    //   Math.random() * 0.0002 - 0.0001
-	    // )
 	    scene.add(shape);
 	    return shapes(n + 1, base);
 	  }
 	}
 
-	shapes(0, 99);
-
-	// Basic Demo
-
-	// let geometry = new THREE.PlaneGeometry(3, 2)
-	// let material = new THREE.MeshBasicMaterial({
-	//   color: 0xa7beca,
-	//   side: THREE.DoubleSide
-	// })
-	// let plane = new THREE.Mesh(geometry, material)
-	// scene.add(plane)
-
-	camera.position.z = 5;
-
-	function renderGraph() {
-	  requestAnimationFrame(renderGraph);
+	function render() {
+	  var ctrl = requestAnimationFrame(render);
 	  scene.traverse(function (node) {
 	    if (node.velocity) {
-	      // node.velocity.add(node.acceleration)
 	      node.position.add(node.velocity);
-
-	      if (node.position.z > 5) {
-	        node.position.z = -15;
-	      }
-
-	      if (node.position.z < -15) {
-	        node.position.z = 5;
-	      }
+	      if (node.position.z > 5) node.position.z = -15;
+	      if (node.position.z < -15) node.position.z = 5;
 	    }
 	  });
 	  renderer.render(scene, camera);
+	  return ctrl;
 	}
 
-	window.addEventListener('resize', function () {
-	  camera.aspect = window.innerWidth / window.innerHeight;
-	  camera.updateProjectionMatrix();
-	  renderer.setSize(window.innerWidth, window.innerHeight);
-	}, false);
+	function startTitle() {
+	  shapes(0, 99);
+	  window.addEventListener('resize', function () {
+	    camera.aspect = window.innerWidth / window.innerHeight;
+	    camera.updateProjectionMatrix();
+	    renderer.setSize(window.innerWidth, window.innerHeight);
+	  }, false);
+	  render();
+	}
 
-	exports.default = renderGraph;
+	exports.default = startTitle;
 
 /***/ },
-/* 578 */
+/* 570 */
 /***/ function(module, exports, __webpack_require__) {
 
 	(function (global, factory) {
@@ -77211,6 +76637,739 @@
 
 	})));
 
+
+/***/ },
+/* 571 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _three = __webpack_require__(570);
+
+	var THREE = _interopRequireWildcard(_three);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	// Scene configuration
+	var scene = new THREE.Scene();
+	scene.background = new THREE.Color(0xf7f6f5);
+
+	// Camera configuration
+	var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.01, 1000);
+	camera.position.z = 5;
+
+	// Renderer configuration
+	var renderer = new THREE.WebGLRenderer({
+	  alpha: true,
+	  antialias: true,
+	  canvas: document.getElementById('graph')
+	});
+	renderer.setSize(window.innerWidth, window.innerHeight);
+
+	// Constructs and returns a node mesh (sphere)
+	function sphere(radius, sw, sh, color, opacity) {
+	  return new THREE.Mesh(new THREE.SphereBufferGeometry(radius, sw, sh), new THREE.MeshBasicMaterial({
+	    color: color,
+	    opacity: opacity,
+	    transparent: true,
+	    wireframe: true
+	  }));
+	}
+
+	// Constructs and returns line meshes between a parent and children
+	function links(parent, children, color) {
+	  var geometry = new THREE.Geometry();
+	  geometry.vertices.push(children.map(function (child) {
+	    parent.position, child.position;
+	  }));
+	  var rV = Math.random();
+	  return new THREE.LineSegments(geometry, new THREE.LineBasicMaterial({ color: color }));
+	}
+
+	// Recursively build viewable portion of graph
+	function graph(n, base) {
+	  if (n < base) {
+	    var rV = Math.random();
+	    var shape = sphere(Math.random(), 8, 8, new THREE.Color(rV, rV, rV), rV * 0.62);
+	    shape.position.set(Math.random() * 8 - 4, Math.random() * 8 - 4, Math.random() * 10 - 5);
+	    shape.velocity = new THREE.Vector3(0, 0, Math.random() * 0.02 - 0.01);
+	    scene.add(shape);
+	    return shapes(n + 1, base);
+	  }
+	}
+
+	function render() {
+	  var ctrl = requestAnimationFrame(render);
+	  scene.traverse(function (node) {
+	    // Do something
+	  });
+	  renderer.render(scene, camera);
+	  return ctrl;
+	}
+
+	function startMain() {
+	  shapes(0, 99);
+	  window.addEventListener('resize', function () {
+	    camera.aspect = window.innerWidth / window.innerHeight;
+	    camera.updateProjectionMatrix();
+	    renderer.setSize(window.innerWidth, window.innerHeight);
+	  }, false);
+	  render();
+	}
+
+	exports.default = startMain;
+
+/***/ },
+/* 572 */,
+/* 573 */,
+/* 574 */,
+/* 575 */,
+/* 576 */,
+/* 577 */,
+/* 578 */,
+/* 579 */,
+/* 580 */,
+/* 581 */,
+/* 582 */,
+/* 583 */,
+/* 584 */,
+/* 585 */,
+/* 586 */,
+/* 587 */,
+/* 588 */,
+/* 589 */,
+/* 590 */,
+/* 591 */,
+/* 592 */,
+/* 593 */,
+/* 594 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(299);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _images = __webpack_require__(595);
+
+	var _text = __webpack_require__(596);
+
+	__webpack_require__(597);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Title = function Title(_ref) {
+	  var googleAuth = _ref.googleAuth;
+
+	  return _react2.default.createElement(
+	    'div',
+	    { className: 'title-view' },
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'title-center-container' },
+	      _react2.default.createElement(
+	        'h1',
+	        { className: 'title-header' },
+	        _text.TITLE_HEADER
+	      ),
+	      _react2.default.createElement(
+	        'h3',
+	        { className: 'title-sub' },
+	        _text.TITLE_DESCRIPTION
+	      ),
+	      _react2.default.createElement('img', {
+	        alt: 'Google Sign In Button',
+	        className: 'google-sign-in',
+	        onClick: googleAuth,
+	        src: _images.GOOGLE_SIGN_IN_SRC
+	      })
+	    ),
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'title-lower-container' },
+	      _react2.default.createElement(
+	        'span',
+	        { className: 'title-small' },
+	        'Version ',
+	        _text.TITLE_VERSION
+	      ),
+	      _react2.default.createElement('br', null),
+	      _react2.default.createElement(
+	        'span',
+	        { className: 'title-small' },
+	        'Written by ',
+	        _text.TITLE_AUTHOR
+	      ),
+	      _react2.default.createElement('br', null),
+	      _react2.default.createElement(
+	        'span',
+	        { className: 'title-small' },
+	        _text.TITLE_EMAIL
+	      )
+	    )
+	  );
+	};
+
+	Title.propTypes = {
+	  googleAuth: _react2.default.PropTypes.func.isRequired
+	};
+
+	exports.default = Title;
+
+/***/ },
+/* 595 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var GOOGLE_SIGN_IN_SRC = exports.GOOGLE_SIGN_IN_SRC = 'images/googleSignIn.png';
+
+/***/ },
+/* 596 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var TITLE_AUTHOR = exports.TITLE_AUTHOR = 'Justin A. Harrison';
+	var TITLE_DESCRIPTION = exports.TITLE_DESCRIPTION = 'Visual traces of knowledge.';
+	var TITLE_EMAIL = exports.TITLE_EMAIL = 'justinadenharrison@gmail.com';
+	var TITLE_HEADER = exports.TITLE_HEADER = 'Sographes';
+	var TITLE_VERSION = exports.TITLE_VERSION = '0.0.0';
+
+/***/ },
+/* 597 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(598);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(600)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../node_modules/css-loader/index.js!./title.css", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js!./title.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 598 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(599)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".title-view {\n  background: rgba(255, 255, 255, 0.38);\n  height: 100%;\n  left: 0;\n  position: absolute;\n  top: 0;\n  width: 100%;\n}\n\n.title-center-container {\n  background: rgba(255, 255, 255, 0.86);\n  border-radius: 4%;\n  box-shadow: 0px 2px 20px #888888;\n  margin: 250px auto 0 auto;\n  min-width: 300px;\n  padding: 3%;\n  text-align: center;\n  width: 38%;\n}\n\n.title-header {\n  color: rgba(0, 0, 0, 0.86);\n  font-size: 300%;\n  top: 38%;\n}\n\n.title-sub {\n  color: rgba(0, 0, 0, 0.62);\n  font-size: 160%;\n}\n\n.title-lower-container {\n  position: absolute;\n  bottom: 2%;\n  left: 2%;\n}\n\n.title-small {\n\n}\n\n.google-sign-in {\n  display: block;\n  height: 50px;\n  margin: 0 auto;\n}\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 599 */
+/***/ function(module, exports) {
+
+	/*
+		MIT License http://www.opensource.org/licenses/mit-license.php
+		Author Tobias Koppers @sokra
+	*/
+	// css base code, injected by the css-loader
+	module.exports = function() {
+		var list = [];
+
+		// return the list of modules as css string
+		list.toString = function toString() {
+			var result = [];
+			for(var i = 0; i < this.length; i++) {
+				var item = this[i];
+				if(item[2]) {
+					result.push("@media " + item[2] + "{" + item[1] + "}");
+				} else {
+					result.push(item[1]);
+				}
+			}
+			return result.join("");
+		};
+
+		// import a list of modules into the list
+		list.i = function(modules, mediaQuery) {
+			if(typeof modules === "string")
+				modules = [[null, modules, ""]];
+			var alreadyImportedModules = {};
+			for(var i = 0; i < this.length; i++) {
+				var id = this[i][0];
+				if(typeof id === "number")
+					alreadyImportedModules[id] = true;
+			}
+			for(i = 0; i < modules.length; i++) {
+				var item = modules[i];
+				// skip already imported module
+				// this implementation is not 100% perfect for weird media query combinations
+				//  when a module is imported multiple times with different media queries.
+				//  I hope this will never occur (Hey this way we have smaller bundles)
+				if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+					if(mediaQuery && !item[2]) {
+						item[2] = mediaQuery;
+					} else if(mediaQuery) {
+						item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+					}
+					list.push(item);
+				}
+			}
+		};
+		return list;
+	};
+
+
+/***/ },
+/* 600 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/*
+		MIT License http://www.opensource.org/licenses/mit-license.php
+		Author Tobias Koppers @sokra
+	*/
+	var stylesInDom = {},
+		memoize = function(fn) {
+			var memo;
+			return function () {
+				if (typeof memo === "undefined") memo = fn.apply(this, arguments);
+				return memo;
+			};
+		},
+		isOldIE = memoize(function() {
+			return /msie [6-9]\b/.test(window.navigator.userAgent.toLowerCase());
+		}),
+		getHeadElement = memoize(function () {
+			return document.head || document.getElementsByTagName("head")[0];
+		}),
+		singletonElement = null,
+		singletonCounter = 0,
+		styleElementsInsertedAtTop = [];
+
+	module.exports = function(list, options) {
+		if(false) {
+			if(typeof document !== "object") throw new Error("The style-loader cannot be used in a non-browser environment");
+		}
+
+		options = options || {};
+		// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
+		// tags it will allow on a page
+		if (typeof options.singleton === "undefined") options.singleton = isOldIE();
+
+		// By default, add <style> tags to the bottom of <head>.
+		if (typeof options.insertAt === "undefined") options.insertAt = "bottom";
+
+		var styles = listToStyles(list);
+		addStylesToDom(styles, options);
+
+		return function update(newList) {
+			var mayRemove = [];
+			for(var i = 0; i < styles.length; i++) {
+				var item = styles[i];
+				var domStyle = stylesInDom[item.id];
+				domStyle.refs--;
+				mayRemove.push(domStyle);
+			}
+			if(newList) {
+				var newStyles = listToStyles(newList);
+				addStylesToDom(newStyles, options);
+			}
+			for(var i = 0; i < mayRemove.length; i++) {
+				var domStyle = mayRemove[i];
+				if(domStyle.refs === 0) {
+					for(var j = 0; j < domStyle.parts.length; j++)
+						domStyle.parts[j]();
+					delete stylesInDom[domStyle.id];
+				}
+			}
+		};
+	}
+
+	function addStylesToDom(styles, options) {
+		for(var i = 0; i < styles.length; i++) {
+			var item = styles[i];
+			var domStyle = stylesInDom[item.id];
+			if(domStyle) {
+				domStyle.refs++;
+				for(var j = 0; j < domStyle.parts.length; j++) {
+					domStyle.parts[j](item.parts[j]);
+				}
+				for(; j < item.parts.length; j++) {
+					domStyle.parts.push(addStyle(item.parts[j], options));
+				}
+			} else {
+				var parts = [];
+				for(var j = 0; j < item.parts.length; j++) {
+					parts.push(addStyle(item.parts[j], options));
+				}
+				stylesInDom[item.id] = {id: item.id, refs: 1, parts: parts};
+			}
+		}
+	}
+
+	function listToStyles(list) {
+		var styles = [];
+		var newStyles = {};
+		for(var i = 0; i < list.length; i++) {
+			var item = list[i];
+			var id = item[0];
+			var css = item[1];
+			var media = item[2];
+			var sourceMap = item[3];
+			var part = {css: css, media: media, sourceMap: sourceMap};
+			if(!newStyles[id])
+				styles.push(newStyles[id] = {id: id, parts: [part]});
+			else
+				newStyles[id].parts.push(part);
+		}
+		return styles;
+	}
+
+	function insertStyleElement(options, styleElement) {
+		var head = getHeadElement();
+		var lastStyleElementInsertedAtTop = styleElementsInsertedAtTop[styleElementsInsertedAtTop.length - 1];
+		if (options.insertAt === "top") {
+			if(!lastStyleElementInsertedAtTop) {
+				head.insertBefore(styleElement, head.firstChild);
+			} else if(lastStyleElementInsertedAtTop.nextSibling) {
+				head.insertBefore(styleElement, lastStyleElementInsertedAtTop.nextSibling);
+			} else {
+				head.appendChild(styleElement);
+			}
+			styleElementsInsertedAtTop.push(styleElement);
+		} else if (options.insertAt === "bottom") {
+			head.appendChild(styleElement);
+		} else {
+			throw new Error("Invalid value for parameter 'insertAt'. Must be 'top' or 'bottom'.");
+		}
+	}
+
+	function removeStyleElement(styleElement) {
+		styleElement.parentNode.removeChild(styleElement);
+		var idx = styleElementsInsertedAtTop.indexOf(styleElement);
+		if(idx >= 0) {
+			styleElementsInsertedAtTop.splice(idx, 1);
+		}
+	}
+
+	function createStyleElement(options) {
+		var styleElement = document.createElement("style");
+		styleElement.type = "text/css";
+		insertStyleElement(options, styleElement);
+		return styleElement;
+	}
+
+	function createLinkElement(options) {
+		var linkElement = document.createElement("link");
+		linkElement.rel = "stylesheet";
+		insertStyleElement(options, linkElement);
+		return linkElement;
+	}
+
+	function addStyle(obj, options) {
+		var styleElement, update, remove;
+
+		if (options.singleton) {
+			var styleIndex = singletonCounter++;
+			styleElement = singletonElement || (singletonElement = createStyleElement(options));
+			update = applyToSingletonTag.bind(null, styleElement, styleIndex, false);
+			remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true);
+		} else if(obj.sourceMap &&
+			typeof URL === "function" &&
+			typeof URL.createObjectURL === "function" &&
+			typeof URL.revokeObjectURL === "function" &&
+			typeof Blob === "function" &&
+			typeof btoa === "function") {
+			styleElement = createLinkElement(options);
+			update = updateLink.bind(null, styleElement);
+			remove = function() {
+				removeStyleElement(styleElement);
+				if(styleElement.href)
+					URL.revokeObjectURL(styleElement.href);
+			};
+		} else {
+			styleElement = createStyleElement(options);
+			update = applyToTag.bind(null, styleElement);
+			remove = function() {
+				removeStyleElement(styleElement);
+			};
+		}
+
+		update(obj);
+
+		return function updateStyle(newObj) {
+			if(newObj) {
+				if(newObj.css === obj.css && newObj.media === obj.media && newObj.sourceMap === obj.sourceMap)
+					return;
+				update(obj = newObj);
+			} else {
+				remove();
+			}
+		};
+	}
+
+	var replaceText = (function () {
+		var textStore = [];
+
+		return function (index, replacement) {
+			textStore[index] = replacement;
+			return textStore.filter(Boolean).join('\n');
+		};
+	})();
+
+	function applyToSingletonTag(styleElement, index, remove, obj) {
+		var css = remove ? "" : obj.css;
+
+		if (styleElement.styleSheet) {
+			styleElement.styleSheet.cssText = replaceText(index, css);
+		} else {
+			var cssNode = document.createTextNode(css);
+			var childNodes = styleElement.childNodes;
+			if (childNodes[index]) styleElement.removeChild(childNodes[index]);
+			if (childNodes.length) {
+				styleElement.insertBefore(cssNode, childNodes[index]);
+			} else {
+				styleElement.appendChild(cssNode);
+			}
+		}
+	}
+
+	function applyToTag(styleElement, obj) {
+		var css = obj.css;
+		var media = obj.media;
+
+		if(media) {
+			styleElement.setAttribute("media", media)
+		}
+
+		if(styleElement.styleSheet) {
+			styleElement.styleSheet.cssText = css;
+		} else {
+			while(styleElement.firstChild) {
+				styleElement.removeChild(styleElement.firstChild);
+			}
+			styleElement.appendChild(document.createTextNode(css));
+		}
+	}
+
+	function updateLink(linkElement, obj) {
+		var css = obj.css;
+		var sourceMap = obj.sourceMap;
+
+		if(sourceMap) {
+			// http://stackoverflow.com/a/26603875
+			css += "\n/*# sourceMappingURL=data:application/json;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + " */";
+		}
+
+		var blob = new Blob([css], { type: "text/css" });
+
+		var oldSrc = linkElement.href;
+
+		linkElement.href = URL.createObjectURL(blob);
+
+		if(oldSrc)
+			URL.revokeObjectURL(oldSrc);
+	}
+
+
+/***/ },
+/* 601 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(299);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _Toolbar = __webpack_require__(602);
+
+	var _Toolbar2 = _interopRequireDefault(_Toolbar);
+
+	var _Dashboard = __webpack_require__(605);
+
+	var _Dashboard2 = _interopRequireDefault(_Dashboard);
+
+	var _Leaderboard = __webpack_require__(606);
+
+	var _Leaderboard2 = _interopRequireDefault(_Leaderboard);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Main = function Main() {
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    _react2.default.createElement(_Toolbar2.default, null),
+	    _react2.default.createElement(_Dashboard2.default, null),
+	    _react2.default.createElement(_Leaderboard2.default, null)
+	  );
+	};
+
+	exports.default = Main;
+
+/***/ },
+/* 602 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(299);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	__webpack_require__(603);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Toolbar = function Toolbar() {
+	  return _react2.default.createElement(
+	    'div',
+	    { className: 'ui-toolbar' },
+	    _react2.default.createElement(
+	      'h3',
+	      null,
+	      'Toolbar'
+	    )
+	  );
+	};
+
+	exports.default = Toolbar;
+
+/***/ },
+/* 603 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(604);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(600)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../node_modules/css-loader/index.js!./toolbar.css", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js!./toolbar.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 604 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(599)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".ui-toolbar {\n  background-color: white;\n  color: black;\n  font: Helvetica;\n}\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 605 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(299);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Dashboard = function Dashboard() {
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    _react2.default.createElement(
+	      'h3',
+	      null,
+	      'Dashboard'
+	    )
+	  );
+	};
+
+	exports.default = Dashboard;
+
+/***/ },
+/* 606 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(299);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Leaderboard = function Leaderboard() {
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    _react2.default.createElement(
+	      'h3',
+	      null,
+	      'Leaderboard'
+	    )
+	  );
+	};
+
+	exports.default = Leaderboard;
 
 /***/ }
 /******/ ]);
