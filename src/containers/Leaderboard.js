@@ -1,4 +1,5 @@
 import React from 'react'
+import '../style/leaderboard.css'
 
 const Leaderboard = () => {
   return (

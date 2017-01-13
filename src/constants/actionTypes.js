@@ -1,2 +1,3 @@
+export const ANIMATE_CSS = 'ANIMATE_CSS'
 export const GOOGLE_AUTH = 'GOOGLE_AUTH'
 export const CONTROL_SCENE = 'CONTROL_SCENE'

@@ -34,7 +34,7 @@ function sphere(radius, sw, sh, color, opacity) {
   )
 }
 
-// Constructs and returns line meshes between a parent and children
+// Constructs and returns lines for graph edges
 function links(parent, children, color) {
   const geometry = new THREE.Geometry()
   geometry.vertices.push(children.map(child => {
@@ -70,7 +70,7 @@ function graph(n, base) {
       Math.random() * 0.02 - 0.01
     )
     scene.add(shape)
-    return shapes(n + 1, base)
+    return graph(n + 1, base)
   }
 }
 

@@ -1,9 +1,10 @@
 import React from 'react'
+import '../style/dashboard.css'
 
 const Dashboard = () => {
   return (
-    <div>
-      <h3>Dashboard</h3>
+    <div className="dashboard-container">
+      Dashboard
     </div>
   )
 }

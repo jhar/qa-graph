@@ -11,7 +11,7 @@ import Main from '../components/Main'
 const Root = ({ dispatch, user }) => {
   return (
     user ? (
-      controlScene(dispatch, 'main', true, startMain),
+      // controlScene(dispatch, 'main', true, startMain),
       <Main />
     ) : (
       controlScene(dispatch, 'title', true, startTitle),

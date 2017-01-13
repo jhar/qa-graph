@@ -33,17 +33,17 @@ function sphere(radius, sw, sh, color, opacity) {
     })
   )
 }
-
+// 0x9c5dd = pinkish
+// 0x97b7d7 = blueish
 // Recursively instantiate spheres and add them to the scene
 function shapes(n, base) {
   if (n < base) {
-    let rV = Math.random()
     let shape = sphere(
       Math.random(),
       8,
       8,
-      new THREE.Color(rV, rV, rV),
-      rV * 0.62
+      new THREE.Color(0x97b7d7),
+      Math.random() * 0.62
     )
     shape.position.set(
       Math.random() * 8 - 4,
