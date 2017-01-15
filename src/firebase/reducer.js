@@ -1,9 +1,9 @@
 import {
   GOOGLE_SIGN_IN,
   GOOGLE_SIGN_OUT
-} from '../constants/actionTypes'
+} from './constants'
 
-const firebase = (state = {}, action) => {
+const reducer = (state = {}, action) => {
   switch (action.type) {
     case GOOGLE_SIGN_IN:
       return {
@@ -22,4 +22,4 @@ const firebase = (state = {}, action) => {
   }
 }
 
-export default firebase
+export default reducer

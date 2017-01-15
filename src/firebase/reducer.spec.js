@@ -1,5 +1,5 @@
+import reducer from './reducer'
 import deepFreeze from 'deep-freeze'
-import firebase from './firebase'
 
 const maybeMutableState = {
   firebase: {
@@ -48,23 +48,23 @@ describe('The firebase reducer', () => {
 
   it('does not mutate state on sign in', () => {
     expect(() => {
-      firebase(maybeMutableState, GOOGLE_SIGN_IN)
+      reducer(maybeMutableState, GOOGLE_SIGN_IN)
     }).not.toBe(maybeMutableState)
   })
 
   it('does not mutate state on sign out', () => {
     expect(() => {
-      firebase(maybeMutableState, GOOGLE_SIGN_OUT)
+      reducer(maybeMutableState, GOOGLE_SIGN_OUT)
     }).not.toBe(maybeMutableState)
   })
 
-  const newState = firebase(maybeMutableState, GOOGLE_SIGN_OUT)
+  const newState = reducer(maybeMutableState, GOOGLE_SIGN_OUT)
 
   it('will leave the user undefined after signing out', () => {
     expect(newState.user).toBeUndefined()
   })
 
-  const newNewState = firebase(newState, GOOGLE_SIGN_IN)
+  const newNewState = reducer(newState, GOOGLE_SIGN_IN)
 
   it('can immediately sign me back in with correct values', () => {
     expect(newNewState.user).toEqual('justin')

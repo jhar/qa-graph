@@ -10,7 +10,7 @@ import {
 import '../style/title.css'
 
 
-const Title = ({ googleAuth }) => {
+const Title = ({ googleSignIn }) => {
   return (
     <div className="title-view">
       <div className="title-center-container">
@@ -23,7 +23,7 @@ const Title = ({ googleAuth }) => {
         <img
           alt="Google Sign In Button"
           className="google-sign-in"
-          onClick={googleAuth}
+          onClick={googleSignIn}
           src={GOOGLE_SIGN_IN_SRC}
         />
       </div>
@@ -37,7 +37,7 @@ const Title = ({ googleAuth }) => {
 }
 
 Title.propTypes = {
-  googleAuth: React.PropTypes.func.isRequired
+  googleSignIn: React.PropTypes.func.isRequired
 }
 
 export default Title
